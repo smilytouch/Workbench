@@ -34,8 +34,8 @@ public class UserServiceImplTest extends AbstractWorkbenchServiceTest {
 	public void test_AuthenticateUser_Success()
 			throws Exception {
 		User user=new User();
-		user.setUname("test1");
+		user.setUSER_NAME("test1");
 		Mockito.when(userRepository.getUser(Mockito.anyString())).thenReturn(user);
-		Assert.assertTrue(user.getUname().equalsIgnoreCase("test1"));
+		Assert.assertTrue(user.getUSER_NAME().equalsIgnoreCase("test1"));
 	}
 }

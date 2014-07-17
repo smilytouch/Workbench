@@ -22,6 +22,7 @@ public class UserRepositoryImplTest extends AbstractWorkbenchDataAccessTest{
 	public void test_getUser_success() throws Exception {
 		LOG_R.info("repository="+repository);
 		User users = repository.getUser("AALLEN");
-		Assert.assertTrue(users.getUname().equalsIgnoreCase("AALLEN"));
+		LOG_R.info("name==="+users.getUSER_NAME()+"id=="+users.getUSER_ID());
+		Assert.assertTrue(users.getUSER_NAME().equalsIgnoreCase("AALLEN"));
 	}
 }

@@ -23,7 +23,7 @@ public class LoginController {
 	@RequestMapping(value = "/homePage", method = RequestMethod.GET)
 	public String checkUser(String uname,String pass) {
 		log.info("inside checkUser......UserService=="+service);
-		boolean flag=service.AuthenticateUser(uname, pass);
+		boolean flag=service.AuthenticateUser(uname);
 		if(flag)
 			return "sanjay";
 		else

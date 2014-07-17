@@ -18,12 +18,12 @@ public class UserServiceImpl implements UserService {
 	@Qualifier(value = "UserRepositoryImpl")
 	UserRepository repository;
 	
-	public boolean AuthenticateUser(String uname, String pass) {
+	public boolean AuthenticateUser(String uname) {
 		// TODO Auto-generated method stub
 		try {
 			User users = repository.getUser(uname);
 			LOG_R.info("Inside AuthenticateUser...user="+users);
-			if (users.getUname().equals(uname) && users.getPass().equals(pass)) {
+			if (users.getUSER_NAME().equals(uname)) {
 				return true;
 			}
 		} catch (Exception e) {
