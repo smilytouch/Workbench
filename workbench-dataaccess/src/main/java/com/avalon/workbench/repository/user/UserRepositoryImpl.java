@@ -8,7 +8,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.avalon.workbench.entities.user.User;
+import com.avalon.workbench.beans.responsibilites.Responsibilites;
+import com.avalon.workbench.beans.user.User;
 
 @Repository("UserRepositoryImpl")
 public class UserRepositoryImpl implements UserRepository {
@@ -20,7 +21,6 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public User getUser(String uname) {
 		// TODO Auto-generated method stub
-		User user = null;
 		try {
 			String sql = "SELECT user_id, user_name FROM fnd_user fu, per_all_people_f papf "
 					+ "WHERE papf.person_id = fu.employee_id "
@@ -40,5 +40,4 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 		return null;
 	}
-
 }

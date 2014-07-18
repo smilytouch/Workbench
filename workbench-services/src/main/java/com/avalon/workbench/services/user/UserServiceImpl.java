@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.avalon.workbench.entities.user.User;
+import com.avalon.workbench.beans.user.User;
 import com.avalon.workbench.repository.user.UserRepository;
 import com.avalon.workbench.repository.user.UserRepositoryImpl;
 

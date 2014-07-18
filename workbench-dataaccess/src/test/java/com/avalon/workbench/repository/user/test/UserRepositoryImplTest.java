@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.avalon.workbench.entities.user.User;
+import com.avalon.workbench.beans.user.User;
 import com.avalon.workbench.repository.test.AbstractWorkbenchDataAccessTest;
 import com.avalon.workbench.repository.user.UserRepository;
 import com.avalon.workbench.repository.user.UserRepositoryImpl;

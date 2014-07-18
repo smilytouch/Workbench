@@ -11,7 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.avalon.workbench.entities.user.User;
+import com.avalon.workbench.beans.user.User;
 import com.avalon.workbench.repository.user.UserRepository;
 import com.avalon.workbench.services.test.AbstractWorkbenchServiceTest;
 import com.avalon.workbench.services.user.UserServiceImpl;
@@ -36,6 +36,7 @@ public class UserServiceImplTest extends AbstractWorkbenchServiceTest {
 		User user=new User();
 		user.setUSER_NAME("test1");
 		Mockito.when(userRepository.getUser(Mockito.anyString())).thenReturn(user);
-		Assert.assertTrue(user.getUSER_NAME().equalsIgnoreCase("test1"));
+		boolean value=service.AuthenticateUser("test1");
+		Assert.assertTrue(value==(true));
 	}
 }
