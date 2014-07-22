@@ -1,7 +1,7 @@
 package com.avalon.workbench.beans.responsibilites;
 
 public class Responsibilites {
-	String user_name,responsibility_name,responsibility_key,application_short_name,start_date,end_date;
+	private String user_name,responsibility_name,responsibility_key,application_short_name,start_date,end_date;
 
 	public String getUser_name() {
 		return user_name;
