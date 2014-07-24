@@ -13,7 +13,7 @@
 </head>
 <div id="topbar">
   <div id="topbar_wraper">
-    <div class="date_stamp"> &nbsp;&nbsp;Welcome <sec:authentication property="principal.username" />  </div>
+    <div class="date_stamp"> &nbsp;&nbsp;Welcome ${uname} <sec:authentication property="principal.username" />  </div>
     <div class="global_links"><a href="admin.html">Home</a> | <a href='<c:url value="/j_spring_security_logout"/>'>Logout</a></div>
     <div class="clearfix"></div>
   </div>

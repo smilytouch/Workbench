@@ -24,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
 		try {
 			String sql = "SELECT user_id, user_name FROM fnd_user fu, per_all_people_f papf "
 					+ "WHERE papf.person_id = fu.employee_id "
-					+ "AND fu.user_name='AALLEN' "
+					+ "AND fu.user_name='"+uname+"' "
 					+ "AND SYSDATE BETWEEN fu.start_date "
 					+ "AND NVL (fu.end_date, SYSDATE) "
 					+ "AND SYSDATE BETWEEN papf.effective_start_date "

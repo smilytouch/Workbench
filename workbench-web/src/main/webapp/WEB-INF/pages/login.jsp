@@ -40,7 +40,7 @@
 	<div id="page_container">
 		<div class="clearfix"></div>
 		<div id="content_main">
-			<form method="get" action="homePage">
+			<form method="post" action="checkUser">
 				<div id="login_pane" class="section_full_search">
 					<div style="float: left;">
 						<span style="font-size: 14px; color: #356BA7;"></span>
@@ -53,7 +53,7 @@
 							<div class="clearfix"></div>
 							<div class="box_border"
 								style="margin: 23px 10px 0 0; background-image: none;">
-
+								<h2 style="color: #D80000; size: 4; margin: 8px 0px 0px 38px">${status}</h2>
 								<label class="required_sign"> </label>
 
 								<div class="float_left">&nbsp;&nbsp;&nbsp;&nbsp;</div>
