@@ -48,11 +48,10 @@ public class LoginController {
 			
 	}
 
-	@RequestMapping(value = "/getResponsibilities", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/getResponsibilities", method = RequestMethod.GET)
 	public String getResponsibilities(@RequestParam("pageId") int pageId,HttpSession session, Model model) throws WorkbenchServiceException {
 		log.info("inside getResponsibilities......");
 		String uname=(String) session.getAttribute("uname");
-		log.info("unameeeeee=="+session.getAttribute("uname"));
 		List<Responsibilites> responsibilites = responsibilitesService
 				.getResonsibilites(uname);
 		PagedListHolder<Responsibilites> pagedListHolder = new PagedListHolder<Responsibilites>(
@@ -62,7 +61,6 @@ public class LoginController {
 		int pageSize = 10;
 		pagedListHolder.setPageSize(pageSize);
 		model.addAttribute("pagedListHolder", pagedListHolder);
-		model.addAttribute("allResponsibilites", responsibilites);
 		return "Responsibilites";
 	}
 

@@ -41,7 +41,7 @@
 		<h1>Responsibilities</h1>
 		
 		<div id="content_main">
-			<c:url value="/getResponsibilities" var="pagedLink">
+			<c:url value="/getConcurrentPrograms?respName=${respName}" var="pagedLink">
 				<c:param name="pageId" value="~" />
 			</c:url>
 			<%-- // load our paging tag, pass pagedListHolder and the link --%>
@@ -59,24 +59,26 @@
 							cellpadding="0">
 							<tr>
 								<th>User Name</th>
-								<th>Responsibility Name</th>
-								<th>Start Date</th>
-								<th>End Date</th>
-								<th>Respnsibilty Key</th>
-								<th>Application Short Name</th>
+								<th>program_name</th>
+								<th>application_name</th>
+								<th>application_short_name</th>
+								<th>concurrent_program_name</th>
+								<th>concurrent_program_id</th>
+								<th>program_application_id</th>
 								<th align="right" valign="top" class="right"></th>
 							</tr>
 
 
 							<c:forEach items="${pagedListHolder.pageList}"
-								var="responsibilites">
+								var="programs">
 								<tr>
-									<td>${responsibilites.user_name}</td>
-									<td><a href="getConcurrentPrograms?pageId=0&respName=${responsibilites.responsibility_name}">${responsibilites.responsibility_name}</a></td>
-									<td>${responsibilites.start_date}</td>
-									<td>${responsibilites.end_date}</td>
-									<td>${responsibilites.responsibility_key}</td>
-									<td>${responsibilites.application_short_name}</td>
+									<td>${programs.user_name}</td>
+									<td>${programs.user_concurrent_program_name}</td>
+									<td>${programs.application_name}</td>
+									<td>${programs.application_short_name}</td>
+									<td>${programs.concurrent_program_name}</td>
+									<td>${programs.concurrent_program_id}</td>
+									<td>${programs.application_id}</td>
 									<td nowrap class="right"><a
 										href="leadPersonEditPage?id=${leadPerson.leadPersonId}"><img
 											src="resources/images/ico_edit.gif" title="Edit" width="18"

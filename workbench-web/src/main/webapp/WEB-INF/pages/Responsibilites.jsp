@@ -72,7 +72,7 @@
 								var="responsibilites">
 								<tr>
 									<td>${responsibilites.user_name}</td>
-									<td><a href="url">${responsibilites.responsibility_name}</a></td>
+									<td><a href="getConcurrentPrograms?pageId=0&respName=${responsibilites.responsibility_name}">${responsibilites.responsibility_name}</a></td>
 									<td>${responsibilites.start_date}</td>
 									<td>${responsibilites.end_date}</td>
 									<td>${responsibilites.responsibility_key}</td>
