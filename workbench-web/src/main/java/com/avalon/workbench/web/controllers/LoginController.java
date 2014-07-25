@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.avalon.workbench.beans.responsibilites.Responsibilites;
+import com.avalon.workbench.services.exception.WorkbenchServiceException;
 import com.avalon.workbench.services.responsibilites.ResponsibilitesService;
 import com.avalon.workbench.services.user.UserService;
 
 @Controller
-@SessionAttributes("uname")
 public class LoginController {
 
 	protected static final Logger log = Logger.getLogger(LoginController.class);
@@ -34,11 +34,11 @@ public class LoginController {
 	ResponsibilitesService responsibilitesService;
 
 	@RequestMapping(value = "/checkUser", method = RequestMethod.POST)
-	public String checkUser(String uname, Model model) throws Exception {
+	public String checkUser(String uname, Model model,HttpSession session) throws Exception {
 		log.info("inside checkUser......");
 		boolean flag = service.AuthenticateUser(uname);
 		if (flag){
-			model.addAttribute("uname", uname);
+			session.setAttribute("uname", uname);
 			return "redirect:getResponsibilities?pageId=0";
 		}
 		else{
@@ -49,9 +49,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/getResponsibilities", method = { RequestMethod.GET, RequestMethod.POST })
-	public String getResponsibilities(@RequestParam("pageId") int pageId,HttpSession session, Model model) {
+	public String getResponsibilities(@RequestParam("pageId") int pageId,HttpSession session, Model model) throws WorkbenchServiceException {
 		log.info("inside getResponsibilities......");
 		String uname=(String) session.getAttribute("uname");
+		log.info("unameeeeee=="+session.getAttribute("uname"));
 		List<Responsibilites> responsibilites = responsibilitesService
 				.getResonsibilites(uname);
 		PagedListHolder<Responsibilites> pagedListHolder = new PagedListHolder<Responsibilites>(

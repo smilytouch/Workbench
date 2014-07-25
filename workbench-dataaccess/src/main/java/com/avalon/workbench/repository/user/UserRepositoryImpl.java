@@ -8,8 +8,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.avalon.workbench.beans.responsibilites.Responsibilites;
 import com.avalon.workbench.beans.user.User;
+import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 
 @Repository("UserRepositoryImpl")
 public class UserRepositoryImpl implements UserRepository {
@@ -19,7 +19,7 @@ public class UserRepositoryImpl implements UserRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public User getUser(String uname) {
+	public User getUser(String uname) throws WorkbenchDataAccessException {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "SELECT user_id, user_name FROM fnd_user fu, per_all_people_f papf "
@@ -37,6 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
 			}
 		} catch (Exception e) {
 			LOG_R.error("Exception occured ::" + e);
+			throw new WorkbenchDataAccessException(e);
 		}
 		return null;
 	}

@@ -1,7 +1,7 @@
 package com.avalon.workbench.beans.concurrntPrograms;
 
 public class ConcurrentPrograms {
-	String user_name,user_concurrent_program_name,application_name,application_short_name,concurrent_program_name,concurrent_program_id,application_id;
+	private String user_name,user_concurrent_program_name,application_name,application_short_name,concurrent_program_name,concurrent_program_id,application_id;
 
 	public String getUser_name() {
 		return user_name;

@@ -9,18 +9,19 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.avalon.workbench.beans.responsibilites.Responsibilites;
+import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 import com.avalon.workbench.repository.user.UserRepositoryImpl;
 
 @Repository("ResponsibilitesRepositoryImpl")
 public class ResponsibilitesRepositoryImpl implements ResponsibilitesRepository {
 	protected static final Logger LOG_R = Logger
-			.getLogger(UserRepositoryImpl.class);
+			.getLogger(ResponsibilitesRepositoryImpl.class);
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Responsibilites> getResonsibilites(String uname) {
+	public List<Responsibilites> getResonsibilites(String uname) throws WorkbenchDataAccessException {
 		// TODO Auto-generated method stub
 		try {
 			LOG_R.info("inside getResponsibilities----");
@@ -30,7 +31,6 @@ public class ResponsibilitesRepositoryImpl implements ResponsibilitesRepository 
 					+ "AND fa.application_id = fat.application_id AND fr.application_id = fat.application_id "
 					+ "AND frt.language =  USERENV('LANG') AND UPPER(fu.user_name) =  UPPER('"+uname+"')  -- <change it> -- "
 					+ "AND (furg.end_date IS NULL OR furg.end_date >= TRUNC(SYSDATE)) ORDER BY frt.responsibility_name;";
-			LOG_R.info("query ==="+sql);
 			BeanPropertyRowMapper rm = new BeanPropertyRowMapper(
 					Responsibilites.class);
 			List<Responsibilites> result = jdbcTemplate.query(sql, rm);
@@ -39,6 +39,7 @@ public class ResponsibilitesRepositoryImpl implements ResponsibilitesRepository 
 			}
 		} catch (Exception e) {
 			LOG_R.error("Exception occured ::" + e);
+			throw new WorkbenchDataAccessException(e);
 		}
 		return null;
 
