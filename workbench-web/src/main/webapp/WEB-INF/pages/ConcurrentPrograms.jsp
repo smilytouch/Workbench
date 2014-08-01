@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>CRM</title>
+<title>WORKBENCH</title>
 <link href="resources/css/css_reset.css" rel="stylesheet"
 	type="text/css">
 <link href="resources/css/theme.css" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@
 
 		</div>
 		<div class="clearfix"></div>
-		<h1>Responsibilities</h1>
+		<h1>Concurrent programs</h1>
 		
 		<div id="content_main">
 			<c:url value="/getConcurrentPrograms?respName=${respName}" var="pagedLink">
@@ -59,12 +59,12 @@
 							cellpadding="0">
 							<tr>
 								<th>User Name</th>
-								<th>program_name</th>
-								<th>application_name</th>
-								<th>application_short_name</th>
-								<th>concurrent_program_name</th>
-								<th>concurrent_program_id</th>
-								<th>program_application_id</th>
+								<th>Program Name</th>
+								<th>Application Name</th>
+								<th>Short Name</th>
+								<th>Concurrent Name</th>
+								<th>Program id</th>
+								<th>Application id</th>
 								<th align="right" valign="top" class="right"></th>
 							</tr>
 
@@ -73,7 +73,7 @@
 								var="programs">
 								<tr>
 									<td>${programs.user_name}</td>
-									<td>${programs.user_concurrent_program_name}</td>
+									<td><a href="getConcurrentPrograms?pageId=0&progName=${programs.user_concurrent_program_name}">${programs.user_concurrent_program_name}</a></td>
 									<td>${programs.application_name}</td>
 									<td>${programs.application_short_name}</td>
 									<td>${programs.concurrent_program_name}</td>

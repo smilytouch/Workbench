@@ -30,7 +30,7 @@ public class ConcurrentProgramsController {
 	
 	@RequestMapping(value = "/getConcurrentPrograms", method = RequestMethod.GET)
 	public String getConcurrentPrograms(@RequestParam("pageId") int pageId,HttpSession session, Model model,String respName) throws WorkbenchServiceException {
-		log.info("inside getResponsibilities......");
+		log.info("inside getConcurrentPrograms......");
 		String uname=(String) session.getAttribute("uname");
 		List<ConcurrentPrograms> programs = concurrentProgramsService.getConcurrentPrograms(uname, respName);
 		PagedListHolder<ConcurrentPrograms> pagedListHolder = new PagedListHolder<ConcurrentPrograms>(programs);

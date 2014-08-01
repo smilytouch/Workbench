@@ -1,5 +1,6 @@
 package com.avalon.workbench.web.controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.avalon.workbench.beans.responsibilites.Responsibilites;
 import com.avalon.workbench.services.exception.WorkbenchServiceException;
@@ -54,6 +54,8 @@ public class LoginController {
 		String uname=(String) session.getAttribute("uname");
 		List<Responsibilites> responsibilites = responsibilitesService
 				.getResonsibilites(uname);
+		Collections.sort(responsibilites);
+		log.info("responsibilities"+responsibilites);
 		PagedListHolder<Responsibilites> pagedListHolder = new PagedListHolder<Responsibilites>(
 				responsibilites);
 		int page = pageId > 0 ? pageId : 0;

@@ -1,6 +1,6 @@
 package com.avalon.workbench.beans.responsibilites;
 
-public class Responsibilites {
+public class Responsibilites implements Comparable<Responsibilites>{
 	private String user_name,responsibility_name,responsibility_key,application_short_name,start_date,end_date;
 
 	public String getUser_name() {
@@ -49,5 +49,10 @@ public class Responsibilites {
 
 	public void setEnd_date(String end_date) {
 		this.end_date = end_date;
+	}
+
+	public int compareTo(Responsibilites o) {
+		// TODO Auto-generated method stub
+		return this.responsibility_name.compareTo(o.getResponsibility_name());
 	}
 }
