@@ -21,7 +21,7 @@ public class concurrentReportRepositoryImplTest extends
 	@Test
 	public void test_runConcurrentProgram_success() throws Exception {
 		LOG_R.info("repository="+repository);
-		repository.runConcurrentProgram();
+		repository.runConcurrentProgram("Purchasing, Vision Operations (USA)", "OPERATIONS", "EMPLOYEE_INFORMATION");
 		Assert.assertTrue(true);
 	}
 	@Test

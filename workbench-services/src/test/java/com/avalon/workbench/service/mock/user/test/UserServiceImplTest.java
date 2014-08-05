@@ -1,6 +1,7 @@
 package com.avalon.workbench.service.mock.user.test;
 
 
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +19,11 @@ import com.avalon.workbench.services.user.UserServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest extends AbstractWorkbenchServiceTest {
+	protected static final Logger LOG_R = Logger
+			.getLogger(UserServiceImplTest.class);
 
 	@InjectMocks
-	UserServiceImpl service;
+	private UserServiceImpl service;
 	
 	@Mock
 	private UserRepository userRepository;

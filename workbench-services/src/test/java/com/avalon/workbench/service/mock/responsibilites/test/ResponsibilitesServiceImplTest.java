@@ -3,6 +3,7 @@ package com.avalon.workbench.service.mock.responsibilites.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,13 +17,16 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.avalon.workbench.beans.responsibilites.Responsibilites;
 import com.avalon.workbench.beans.user.User;
 import com.avalon.workbench.repository.responsibilites.ResponsibilitesRepository;
+import com.avalon.workbench.service.mock.concurrentPrograms.test.ConcurrentProgramsServiceImplTest;
 import com.avalon.workbench.services.responsibilites.ResponsibilitesServiceImpl;
 import com.avalon.workbench.services.test.AbstractWorkbenchServiceTest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ResponsibilitesServiceImplTest extends AbstractWorkbenchServiceTest{
+	protected static final Logger LOG_R = Logger
+			.getLogger(ResponsibilitesServiceImplTest.class);
 	@InjectMocks
-	ResponsibilitesServiceImpl service;
+	private ResponsibilitesServiceImpl service;
 	
 	@Mock
 	private ResponsibilitesRepository responsibilitesRepository;

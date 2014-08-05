@@ -6,6 +6,6 @@ import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 
 @Repository
 public interface concurrentReportRepository {
-	public void runConcurrentProgram() throws WorkbenchDataAccessException;
+	public void runConcurrentProgram(String respName, String uname, String progName) throws WorkbenchDataAccessException;
 	public void getConcurrentReport() throws WorkbenchDataAccessException;
 }

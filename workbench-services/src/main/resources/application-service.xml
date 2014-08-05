@@ -28,7 +28,7 @@
 
 	<context:annotation-config />
 
-	<context:property-override location="classpath:jdbc.properties" />
+	<!-- <context:property-override location="classpath:jdbc.properties" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" />
 
@@ -44,7 +44,7 @@
 			</props>
 		</property>
 		<property name="packagesToScan" value="com.avalon.workbench.entities" />
-	</bean>
+	</bean> -->
 	<import resource="classpath:applicationContext.xml" />
 
 </beans>

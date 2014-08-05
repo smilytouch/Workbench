@@ -30,7 +30,7 @@ public class concurrentReportRepositoryImpl implements
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void runConcurrentProgram() throws WorkbenchDataAccessException {
+	public void runConcurrentProgram(final String respName, final String uname, final String progName) throws WorkbenchDataAccessException {
 		try {
 			CallableStatementCreator callableStatementCreator=new CallableStatementCreator() {
 				
@@ -38,15 +38,15 @@ public class concurrentReportRepositoryImpl implements
 				public CallableStatement createCallableStatement(Connection con)
 						throws SQLException {
 					CallableStatement cs=con.prepareCall("{call Concurrent_Prog_Exec(?,?,?,?,?,?,?,?,?,?)}");
-					cs.setString(1, "Purchasing, Vision Operations (USA)");
-					cs.setString(2, "OPERATIONS");
+					cs.setString(1, respName);
+					cs.setString(2, uname);
 					cs.setString(3, "PO");
 					cs.setString(4, "EMPLOYEE_INFORMATION");
 					cs.setString(5, "en");
 					cs.setString(6, "US");
 					cs.setString(7, "PDF");
 					cs.setString(8, "PO");
-					cs.setString(9, "EMPLOYEE_INFORMATION");
+					cs.setString(9, progName);
 					cs.setString(10, "1010");
 					return cs;
 				}
@@ -74,7 +74,7 @@ public class concurrentReportRepositoryImpl implements
 		String hostname = "192.168.100.100";
 		String username = "root";
 		String password = "redhat";
-		String copyFrom = "/oraAS/oracle/VIS/inst/apps/VIS_apps/logs/appl/conc/out/EMPLOYEE_INFORMATION_5900376_1.PDF";
+		String copyFrom = "/oraAS/oracle/VIS/inst/apps/VIS_apps/logs/appl/conc/out/EMPLOYEE_INFORMATION_5900869_1.PDF";
         String copyTo = "F:/san.pdf"; 
         JSch jsch = new JSch();
         Session session = null;

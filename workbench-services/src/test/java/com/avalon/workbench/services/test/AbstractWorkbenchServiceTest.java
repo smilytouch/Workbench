@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 
 
-@ContextConfiguration( { "classpath:test-applicationContext.xml"} )
+@ContextConfiguration( { "classpath:test-application-service.xml"} )
 @RunWith( SpringJUnit4ClassRunner.class )
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
     DbUnitTestExecutionListener.class , DirtiesContextTestExecutionListener.class})

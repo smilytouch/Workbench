@@ -1,24 +1,28 @@
 package com.avalon.workbench.web.controllers;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.avalon.workbench.beans.concurrntPrograms.ConcurrentPrograms;
-import com.avalon.workbench.beans.responsibilites.Responsibilites;
 import com.avalon.workbench.services.concurrentPrograms.ConcurrentProgramsService;
 import com.avalon.workbench.services.exception.WorkbenchServiceException;
-import com.avalon.workbench.services.responsibilites.ResponsibilitesService;
 
 @Controller
 public class ConcurrentProgramsController {
@@ -41,5 +45,21 @@ public class ConcurrentProgramsController {
 		model.addAttribute("pagedListHolder", pagedListHolder);
 		model.addAttribute("respName", respName);
 		return "ConcurrentPrograms";
+	}
+	
+	@RequestMapping(value = "/getReport", method = RequestMethod.GET)
+	public void getFile(HttpServletResponse response) {
+	    try {
+	      // get your file as InputStream
+	      InputStream is = new FileInputStream("F:/san.pdf");
+	      // copy it to response's OutputStream
+	      IOUtils.copy(is, response.getOutputStream());
+	      response.setContentType("application/pdf");
+	      response.flushBuffer();
+	    } catch (IOException ex) {
+	      log.info("Error writing file to output stream. Filename was");
+	      throw new RuntimeException("IOError writing file to output stream");
+	    }
+
 	}
 }
