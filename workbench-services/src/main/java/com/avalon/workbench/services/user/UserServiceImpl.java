@@ -19,19 +19,20 @@ public class UserServiceImpl implements UserService {
 	@Qualifier(value = "UserRepositoryImpl")
 	UserRepository repository;
 	
-	public boolean AuthenticateUser(String uname) throws WorkbenchServiceException {
+	public boolean AuthenticateUser(String uname, String pwd) throws WorkbenchServiceException {
 		// TODO Auto-generated method stub
 		try {
 			User users = repository.getUser(uname);
 			LOG_R.info("Inside AuthenticateUser...user="+users);
-			if (users.getUSER_NAME().equals(uname)) {
+			if (users != null && users.getUSER_NAME().equals(uname) && users.getPASSWORD().equals(pwd)) {
 				return true;
 			}
+			return false;
 		} catch (Exception e) {
 			LOG_R.error("Exception occured ::" + e);
 			throw new WorkbenchServiceException(e);
 		}
-		return false;
+		
 	}
 
 }

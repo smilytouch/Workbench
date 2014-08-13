@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SqlOutParameter;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.stereotype.Repository;
 
@@ -30,14 +31,14 @@ public class concurrentReportRepositoryImpl implements
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void runConcurrentProgram(final String respName, final String uname, final String progName) throws WorkbenchDataAccessException {
+	public String runConcurrentProgram(final String respName, final String uname, final String progName) throws WorkbenchDataAccessException {
 		try {
 			CallableStatementCreator callableStatementCreator=new CallableStatementCreator() {
 				
 				@Override
 				public CallableStatement createCallableStatement(Connection con)
 						throws SQLException {
-					CallableStatement cs=con.prepareCall("{call Concurrent_Prog_Exec(?,?,?,?,?,?,?,?,?,?)}");
+					CallableStatement cs=con.prepareCall("{call Concurrent_Prog_Exec(?,?,?,?,?,?,?,?,?,?,?)}");
 					cs.setString(1, respName);
 					cs.setString(2, uname);
 					cs.setString(3, "PO");
@@ -48,6 +49,7 @@ public class concurrentReportRepositoryImpl implements
 					cs.setString(8, "PO");
 					cs.setString(9, progName);
 					cs.setString(10, "1010");
+					cs.registerOutParameter(11,Types.INTEGER);
 					return cs;
 				}
 			};
@@ -62,7 +64,11 @@ public class concurrentReportRepositoryImpl implements
 			params.add(new SqlParameter(Types.VARCHAR));
 			params.add(new SqlParameter(Types.VARCHAR));
 			params.add(new SqlParameter(Types.VARCHAR));
-			jdbcTemplate.call(callableStatementCreator, params);
+			params.add(new SqlOutParameter("retVal", Types.INTEGER));
+			String reqId=(String) jdbcTemplate.call(callableStatementCreator, params).get("retVal").toString();
+			if(reqId!=null)
+				return reqId;
+			return "0";
 		} catch (Exception e) {
 			LOG_R.error("Exception occured ::" + e);
 			throw new WorkbenchDataAccessException(e);
@@ -70,12 +76,13 @@ public class concurrentReportRepositoryImpl implements
 	}
 
 	@Override
-	public void getConcurrentReport() throws WorkbenchDataAccessException {
+	public void getConcurrentReport(String progName) throws WorkbenchDataAccessException {
 		String hostname = "192.168.100.100";
 		String username = "root";
 		String password = "redhat";
-		String copyFrom = "/oraAS/oracle/VIS/inst/apps/VIS_apps/logs/appl/conc/out/EMPLOYEE_INFORMATION_5900869_1.PDF";
-        String copyTo = "F:/san.pdf"; 
+		String copyFrom = "/oraAS/oracle/VIS/inst/apps/VIS_apps/logs/appl/conc/out/"+progName+".PDF";
+		LOG_R.info("Copyfrom==="+copyFrom);
+        String copyTo = "F:/"+progName+".pdf"; 
         JSch jsch = new JSch();
         Session session = null;
 		try {

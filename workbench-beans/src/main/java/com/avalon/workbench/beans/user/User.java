@@ -24,6 +24,14 @@ public class User implements Serializable {
 		USER_NAME = uSER_NAME;
 	}
 
-	private String USER_NAME;
+	private String USER_NAME,PASSWORD;
+
+	public String getPASSWORD() {
+		return PASSWORD;
+	}
+
+	public void setPASSWORD(String pASSWORD) {
+		PASSWORD = pASSWORD;
+	}
 	
 }

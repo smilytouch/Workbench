@@ -34,16 +34,16 @@ public class LoginController {
 	ResponsibilitesService responsibilitesService;
 
 	@RequestMapping(value = "/checkUser", method = RequestMethod.POST)
-	public String checkUser(String uname, Model model,HttpSession session) throws Exception {
+	public String checkUser(String uname,String pass, Model model,HttpSession session) throws Exception {
 		log.info("inside checkUser......");
-		boolean flag = service.AuthenticateUser(uname);
+		boolean flag = service.AuthenticateUser(uname, pass);
 		if (flag){
 			session.setAttribute("uname", uname);
 			return "redirect:getResponsibilities?pageId=0";
 		}
 		else{
 			model.addAttribute("status", "invalid Username");
-			return "redirect:login";
+			return "login";
 		}
 			
 	}
@@ -68,6 +68,10 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() throws Exception {
+		return "login";
+	}
+	@RequestMapping(value = "/j_spring_security_logout", method = RequestMethod.GET)
+	public String logout() throws Exception {
 		return "login";
 	}
 }

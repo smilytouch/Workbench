@@ -45,13 +45,8 @@ public class ConcurrentReportServiceImplTest extends
 
 	@Test
 	public void test_runConcurrentProgram_Success() throws Exception {
-		service.runConcurrentProgram("Purchasing, Vision Operations (USA)", "OPERATIONS", "EMPLOYEE_INFORMATION");
+		service.getConcurrentReport("Purchasing, Vision Operations (USA)", "OPERATIONS", "EMPLOYEE_INFORMATION");
 		Assert.assertTrue(true);
 	}
-	@Test
-	public void test_getConcurrentReport_Success() throws Exception {
-		service.getConcurrentReport();
-		Assert.assertTrue(true);
-	}
-
+	
 }

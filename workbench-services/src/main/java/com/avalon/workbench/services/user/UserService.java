@@ -6,5 +6,5 @@ import com.avalon.workbench.services.exception.WorkbenchServiceException;
 
 @Service
 public interface UserService {
-	public boolean AuthenticateUser(String uname) throws WorkbenchServiceException;
+	public boolean AuthenticateUser(String uname, String pwd) throws WorkbenchServiceException;
 }
