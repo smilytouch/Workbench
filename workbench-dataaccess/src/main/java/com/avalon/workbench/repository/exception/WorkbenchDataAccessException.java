@@ -1,11 +1,6 @@
 package com.avalon.workbench.repository.exception;
 
 
-/**
- * 
- * @author Nunc-115
- * 
- */
 public class WorkbenchDataAccessException extends Exception {
 
 	private static final long serialVersionUID = -463972374030603782L;

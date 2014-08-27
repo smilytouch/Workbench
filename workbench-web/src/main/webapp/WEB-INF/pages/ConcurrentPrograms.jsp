@@ -73,7 +73,7 @@
 								var="programs">
 								<tr>
 									<td>${programs.user_name}</td>
-									<td><a href="getReport?respName=${respName}&progName=${programs.user_concurrent_program_name}">${programs.user_concurrent_program_name}</a></td>
+									<td><a href="getParameters?progName=${programs.user_concurrent_program_name}&shortName=${programs.application_short_name}&concurrentName=${programs.concurrent_program_name}&respName=${respName}">${programs.user_concurrent_program_name}</a></td>
 									<td>${programs.application_name}</td>
 									<td>${programs.application_short_name}</td>
 									<td>${programs.concurrent_program_name}</td>

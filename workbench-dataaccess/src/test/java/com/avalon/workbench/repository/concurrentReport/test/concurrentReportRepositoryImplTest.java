@@ -1,11 +1,14 @@
 package com.avalon.workbench.repository.concurrentReport.test;
 
+import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.avalon.workbench.beans.concurrntReport.Inputs;
 import com.avalon.workbench.repository.concurrentReport.concurrentReportRepository;
 import com.avalon.workbench.repository.test.AbstractWorkbenchDataAccessTest;
 
@@ -18,9 +21,17 @@ public class concurrentReportRepositoryImplTest extends
 	concurrentReportRepository repository;
 
 	@Test
-	public void test_runConcurrentProgram_success() throws Exception {
+	public void test_generateConcurrentReport_success() throws Exception {
 		LOG_R.info("repository="+repository);
-		String id=repository.runConcurrentProgram("Purchasing, Vision Operations (USA)", "OPERATIONS", "APXEMELR");
+		Inputs inputs=new Inputs();
+		inputs.setApplication_Short_Name("PO");
+		inputs.setTemplate_code("EMPLOYEE_INFORMATION");
+		inputs.setDefault_Language("en");
+		inputs.setDefault_Territory("US");
+		inputs.setDefault_output_type("PDF");
+		ArrayList<String> list=new ArrayList<String>();
+		list.add("1010");
+		String id=repository.generateConcurrentReport("Purchasing, Vision Operations (USA)", "OPERATIONS", "po", "EMPLOYEE_INFORMATION", inputs, list);
 		LOG_R.info("id==="+id);
 		Assert.assertTrue(true);
 	}

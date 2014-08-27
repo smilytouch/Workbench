@@ -13,9 +13,9 @@ import com.avalon.workbench.repository.concurrentReport.concurrentReportReposito
 import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 import com.avalon.workbench.services.exception.WorkbenchServiceException;
 
-@Service("concurrentReportParamsServiceImpl")
-public class concurrentReportParamsServiceImpl implements
-		concurrentReportParamsService {
+@Service("ConcurrentReportParamsServiceImpl")
+public class ConcurrentReportParamsServiceImpl implements
+		ConcurrentReportParamsService {
 	protected static final Logger LOG_R = Logger
 			.getLogger(ConcurrentReportServiceImpl.class);
 

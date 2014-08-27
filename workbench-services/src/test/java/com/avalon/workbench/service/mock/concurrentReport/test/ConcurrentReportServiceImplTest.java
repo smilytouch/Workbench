@@ -17,8 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.avalon.workbench.beans.concurrntPrograms.ConcurrentPrograms;
+import com.avalon.workbench.beans.concurrntReport.Inputs;
 import com.avalon.workbench.repository.concurrentReport.concurrentReportRepository;
-import com.avalon.workbench.repository.concurrentReport.concurrentReportRepositoryImpl;
+import com.avalon.workbench.repository.concurrentReport.ConcurrentReportRepositoryImpl;
 import com.avalon.workbench.services.concurrentReport.ConcurrentReportServiceImpl;
 import com.avalon.workbench.services.test.AbstractWorkbenchServiceTest;
 
@@ -44,8 +45,10 @@ public class ConcurrentReportServiceImplTest extends
 	}*/
 
 	@Test
-	public void test_runConcurrentProgram_Success() throws Exception {
-		service.getConcurrentReport("Purchasing, Vision Operations (USA)", "OPERATIONS", "EMPLOYEE_INFORMATION");
+	public void test_getConcurrentReport_Success() throws Exception {
+		ArrayList<String> list=new ArrayList<String>();
+		list.add("1010");
+		service.getConcurrentReport("Purchasing, Vision Operations (USA)", "OPERATIONS", "po", "EMPLOYEE_INFORMATION", "EMPLOYEE_INFORMATION", list);
 		Assert.assertTrue(true);
 	}
 	

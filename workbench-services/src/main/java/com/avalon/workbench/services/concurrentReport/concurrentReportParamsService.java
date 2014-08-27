@@ -8,6 +8,6 @@ import com.avalon.workbench.beans.concurrntReport.Parameters;
 import com.avalon.workbench.services.exception.WorkbenchServiceException;
 
 @Service
-public interface concurrentReportParamsService {
+public interface ConcurrentReportParamsService {
 	public List<Parameters> getParams(String progName) throws WorkbenchServiceException;
 }
