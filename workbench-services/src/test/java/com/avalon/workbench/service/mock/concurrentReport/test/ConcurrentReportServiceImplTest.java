@@ -48,7 +48,7 @@ public class ConcurrentReportServiceImplTest extends
 	public void test_getConcurrentReport_Success() throws Exception {
 		ArrayList<String> list=new ArrayList<String>();
 		list.add("1010");
-		service.getConcurrentReport("Purchasing, Vision Operations (USA)", "OPERATIONS", "po", "EMPLOYEE_INFORMATION", "EMPLOYEE_INFORMATION", list);
+		service.getConcurrentReport("Purchasing, Vision Operations (USA)", "OPERATIONS", "po", "POXMCDEF", null);
 		Assert.assertTrue(true);
 	}
 	

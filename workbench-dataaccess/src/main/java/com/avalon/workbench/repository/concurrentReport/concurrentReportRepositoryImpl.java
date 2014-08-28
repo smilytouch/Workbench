@@ -33,45 +33,73 @@ public class ConcurrentReportRepositoryImpl implements
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public String generateConcurrentReport(final String respName, final String uname, final String shortName,final String progName, final Inputs inputs, final ArrayList<String> params) throws WorkbenchDataAccessException {
+	public String generateConcurrentReport(final String respName,
+			final String uname, final String shortName,
+			final String concurrentName, final Inputs inputs,
+			final ArrayList<String> params) throws WorkbenchDataAccessException {
 		try {
-			CallableStatementCreator callableStatementCreator=new CallableStatementCreator() {
-				
+			CallableStatementCreator callableStatementCreator = new CallableStatementCreator() {
+
 				@Override
 				public CallableStatement createCallableStatement(Connection con)
 						throws SQLException {
-					CallableStatement cs=con.prepareCall("{call Concurrent_Prog_Exec(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-					LOG_R.info("inside get concurrent report----respName=="+respName+"uname="+uname+"sname="+inputs.getApplication_Short_Name()+"tempcode="+inputs.getTemplate_code()+"shname="+shortName+"progname="+progName+"empid="+params.get(0));
+					CallableStatement cs = con
+							.prepareCall("{call Concurrent_Prog_Exec(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 					cs.setString(1, respName);
 					cs.setString(2, uname);
-					cs.setString(3, inputs.getApplication_Short_Name());
-					cs.setString(4, inputs.getTemplate_code());
-					cs.setString(5, inputs.getDefault_Language());
-					cs.setString(6, inputs.getDefault_Territory());
-					cs.setString(7, inputs.getDefault_output_type());
+					if (inputs != null) {
+						cs.setString(3, inputs.getApplication_Short_Name());
+						cs.setString(4, inputs.getTemplate_code());
+						cs.setString(5, inputs.getDefault_Language());
+						cs.setString(6, inputs.getDefault_Territory());
+						cs.setString(7, inputs.getDefault_output_type());
+					} else {
+						cs.setString(3, null);
+						cs.setString(4, null);
+						cs.setString(5, null);
+						cs.setString(6, null);
+						cs.setString(7, null);
+					}
 					cs.setString(8, shortName);
-					cs.setString(9, progName);
-					
-					cs.setString(10, params.get(0));
-					cs.setString(11, null);
-					cs.setString(12, null);
-					cs.setString(13, null);
-					cs.setString(14, null);
-					cs.setString(15, null);
-					cs.setString(16, null);
-					cs.setString(17, null);
-					cs.setString(18, null);
-					cs.setString(19, null);
-					cs.setString(20, null);
-					cs.setString(21, null);
-					cs.setString(22, null);
-					cs.setString(23, null);
-					cs.setString(24, null);
-					cs.registerOutParameter(25,Types.INTEGER);
+					cs.setString(9, concurrentName);
+					if (params != null) {
+						cs.setString(10, params.get(0));
+						cs.setString(11, null);
+						cs.setString(12, null);
+						cs.setString(13, null);
+						cs.setString(14, null);
+						cs.setString(15, null);
+						cs.setString(16, null);
+						cs.setString(17, null);
+						cs.setString(18, null);
+						cs.setString(19, null);
+						cs.setString(20, null);
+						cs.setString(21, null);
+						cs.setString(22, null);
+						cs.setString(23, null);
+						cs.setString(24, null);
+					} else {
+						cs.setString(10, null);
+						cs.setString(11, null);
+						cs.setString(12, null);
+						cs.setString(13, null);
+						cs.setString(14, null);
+						cs.setString(15, null);
+						cs.setString(16, null);
+						cs.setString(17, null);
+						cs.setString(18, null);
+						cs.setString(19, null);
+						cs.setString(20, null);
+						cs.setString(21, null);
+						cs.setString(22, null);
+						cs.setString(23, null);
+						cs.setString(24, null);
+					}
+					cs.registerOutParameter(25, Types.INTEGER);
 					return cs;
 				}
 			};
-			List param=new ArrayList();
+			List param = new ArrayList();
 			param.add(new SqlParameter(Types.VARCHAR));
 			param.add(new SqlParameter(Types.VARCHAR));
 			param.add(new SqlParameter(Types.VARCHAR));
@@ -97,8 +125,10 @@ public class ConcurrentReportRepositoryImpl implements
 			param.add(new SqlParameter(Types.VARCHAR));
 			param.add(new SqlParameter(Types.VARCHAR));
 			param.add(new SqlOutParameter("retVal", Types.INTEGER));
-			String reqId=(String) jdbcTemplate.call(callableStatementCreator, param).get("retVal").toString();
-			if(reqId!=null)
+			String reqId = (String) jdbcTemplate
+					.call(callableStatementCreator, param).get("retVal")
+					.toString();
+			if (reqId != null)
 				return reqId;
 			return "0";
 		} catch (Exception e) {
@@ -108,27 +138,29 @@ public class ConcurrentReportRepositoryImpl implements
 	}
 
 	@Override
-	public void getConcurrentReport(String progName) throws WorkbenchDataAccessException {
+	public void getConcurrentReport(String fileName)
+			throws WorkbenchDataAccessException {
 		String hostname = "192.168.100.100";
 		String username = "root";
 		String password = "redhat";
-		String copyFrom = "/oraAS/oracle/VIS/inst/apps/VIS_apps/logs/appl/conc/out/"+progName+".PDF";
-		LOG_R.info("Copyfrom==="+copyFrom);
-        String copyTo = "F:/"+progName+".pdf"; 
-        JSch jsch = new JSch();
-        Session session = null;
+		String copyFrom = "/oraAS/oracle/VIS/inst/apps/VIS_apps/logs/appl/conc/out/"
+				+ fileName;
+		LOG_R.info("Copyfrom===" + copyFrom);
+		String copyTo = "F:/" + fileName;
+		JSch jsch = new JSch();
+		Session session = null;
 		try {
-			 session = jsch.getSession(username, hostname, 22);
-	            session.setConfig("StrictHostKeyChecking", "no");
-	            session.setPassword(password);
-	            session.connect(); 
-	            Channel channel = session.openChannel("sftp");
-	            channel.connect();
-	            LOG_R.info("inside getConcurrentReport--------Connected");
-	            ChannelSftp sftpChannel = (ChannelSftp) channel; 
-	            sftpChannel.get(copyFrom, copyTo);
-	            sftpChannel.exit();
-	            session.disconnect();
+			session = jsch.getSession(username, hostname, 22);
+			session.setConfig("StrictHostKeyChecking", "no");
+			session.setPassword(password);
+			session.connect();
+			Channel channel = session.openChannel("sftp");
+			channel.connect();
+			LOG_R.info("inside getConcurrentReport--------Connected");
+			ChannelSftp sftpChannel = (ChannelSftp) channel;
+			sftpChannel.get(copyFrom, copyTo);
+			sftpChannel.exit();
+			session.disconnect();
 		} catch (Exception e) {
 			LOG_R.error("Exception occured ::" + e);
 			throw new WorkbenchDataAccessException(e);

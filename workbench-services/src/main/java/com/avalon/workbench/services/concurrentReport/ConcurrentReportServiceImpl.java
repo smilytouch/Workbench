@@ -21,23 +21,35 @@ public class ConcurrentReportServiceImpl implements ConcurrentReportService {
 	@Autowired
 	@Qualifier(value = "concurrentReportRepositoryImpl")
 	concurrentReportRepository concurrentReportRepository;
-	
+
 	@Autowired
 	@Qualifier(value = "ConcurrentReportInputsServiceImpl")
 	ConcurrentReportInputsService service;
 
 	public String getConcurrentReport(String respName, String uname,
-			String shortName, String progName, String concurrentName, ArrayList<String> params) throws WorkbenchServiceException, InterruptedException {
+			String shortName, String concurrentName, ArrayList<String> params) throws WorkbenchServiceException,
+			InterruptedException {
 		try {
-			LOG_R.info("respName===="+concurrentName);
-			Inputs inputs=service.getInputs(concurrentName);
-			LOG_R.info("shortname==="+inputs.getApplication_Short_Name()+inputs.getDefault_Language());
-			String reqId=concurrentReportRepository.generateConcurrentReport(respName, uname,shortName, progName, inputs, params);
-			String newProgName=concurrentName+"_"+reqId+"_1";
-			LOG_R.info("new progName==" + newProgName);
-			Thread.sleep(20000);
-			concurrentReportRepository.getConcurrentReport(newProgName);
-			return newProgName;
+			String reqId;
+			String fileName;
+			Inputs inputs = service.getInputs(concurrentName);
+			if (inputs != null) {
+				reqId = concurrentReportRepository.generateConcurrentReport(
+						respName, uname, shortName, concurrentName, inputs, params);
+				fileName = concurrentName + "_" + reqId + "_1.PDF";
+				LOG_R.info(" inside if....new fileName==" + fileName);
+				Thread.sleep(30000);
+				concurrentReportRepository.getConcurrentReport(fileName);
+			} else {
+				reqId = concurrentReportRepository.generateConcurrentReport(
+						respName, uname, shortName, concurrentName, null, params);
+				fileName = "o"+ reqId+".out";
+				LOG_R.info("new fileName==" + fileName);
+				Thread.sleep(30000);
+				concurrentReportRepository.getConcurrentReport(fileName);
+			}
+			LOG_R.info("file name sent to controller=="+fileName);
+			return fileName;
 		} catch (WorkbenchDataAccessException e) {
 			LOG_R.error("Exception occured ::" + e);
 			throw new WorkbenchServiceException(e);

@@ -74,12 +74,13 @@ public class ConcurrentProgramsController {
 			log.info("parameter==="+paramsList.get(0)+"respName="+respName);
 			String uname = (String) session.getAttribute("uname");
 			String fileName = concurrentReportService.getConcurrentReport(
-					respName, uname, shortName, progName, concurrentName, paramsList);
+					respName, uname, shortName, concurrentName, paramsList);
+			log.info("filename====="+fileName);
 			// get your file as InputStream
-			InputStream is = new FileInputStream("F:/" + fileName + ".pdf");
+			InputStream is = new FileInputStream("F:/" + fileName);
 			// copy it to response's OutputStream
 			IOUtils.copy(is, response.getOutputStream());
-			response.setContentType("application/pdf");
+			//response.setContentType("application/pdf");
 			response.flushBuffer();
 		} catch (Exception ex) {
 			log.info("Error writing file to output stream. Filename was");

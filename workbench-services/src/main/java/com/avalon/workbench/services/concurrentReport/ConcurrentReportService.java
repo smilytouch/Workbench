@@ -9,5 +9,5 @@ import com.avalon.workbench.services.exception.WorkbenchServiceException;
 
 @Service
 public interface ConcurrentReportService {
-	public String getConcurrentReport(String respName, String uname, String shortName, String progName, String concurrentName, ArrayList<String> params) throws WorkbenchServiceException, InterruptedException;
+	public String getConcurrentReport(String respName, String uname, String shortName, String concurrentName, ArrayList<String> params) throws WorkbenchServiceException, InterruptedException;
 }

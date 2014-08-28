@@ -10,6 +10,6 @@ import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 
 @Repository
 public interface concurrentReportRepository {
-	public String generateConcurrentReport(String respName, String uname, String shortName,String progName, Inputs inputs, ArrayList<String> params) throws WorkbenchDataAccessException;
-	public void getConcurrentReport(String progName) throws WorkbenchDataAccessException;
+	public String generateConcurrentReport(String respName, String uname, String shortName,String concurrentName, Inputs inputs, ArrayList<String> params) throws WorkbenchDataAccessException;
+	public void getConcurrentReport(String fileName) throws WorkbenchDataAccessException;
 }

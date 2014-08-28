@@ -8,9 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.avalon.workbench.beans.concurrntPrograms.ConcurrentPrograms;
 import com.avalon.workbench.beans.concurrntReport.Inputs;
-import com.avalon.workbench.repository.concurrentPrograms.ConcurrentProgramsRepositoryImpl;
 import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 
 @Repository("ConcurrentReportInputsRepositoryImpl")
@@ -35,7 +33,9 @@ public class ConcurrentReportInputsRepositoryImpl implements
 			LOG_R.info("query==" + sql);
 			BeanPropertyRowMapper rm = new BeanPropertyRowMapper(Inputs.class);
 			List<Inputs> result = jdbcTemplate.query(sql, rm);
-			return result.get(0);
+			if (result != null && !result.isEmpty())
+				return result.get(0);
+			return null;
 		} catch (Exception e) {
 			LOG_R.error("Exception occured ::" + e);
 			throw new WorkbenchDataAccessException(e);
