@@ -95,7 +95,7 @@
 							</c:forEach> --%>
 							<c:forEach items="${parameters}" var="parameter">
 								<tr>
-									<td>${parameter.prompt}<input type="text"
+									<td>${parameter.prompt}</td><td><input type="text"
 										name="${parameter.prompt}"></td>
 									</br>
 								</tr>

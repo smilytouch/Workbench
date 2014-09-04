@@ -25,13 +25,9 @@ public class concurrentReportParamsRepositoryImpl implements
 	public List<Parameters> getParams(String progName)
 			throws WorkbenchDataAccessException {
 		try {
-			String sql = "select fdfcuv.form_left_prompt prompt from   "
-					+ "fnd_concurrent_programs fcp, fnd_concurrent_programs_tl fcpl   , "
-					+ "fnd_descr_flex_col_usage_vl fdfcuv   , fnd_application_vl fav "
-					+ "where  fcp.concurrent_program_id = fcpl.concurrent_program_id and    "
-					+ "fcpl.user_concurrent_program_name ='"
+			String sql = "SELECT        fdfcuv.column_seq_num ,        fdfcuv.form_left_prompt ,        fdfcuv.enabled_flag ,        fdfcuv.required_flag ,        fdfcuv.display_flag ,        fdfcuv.flex_value_set_id ,        ffvs.flex_value_set_name ,       Fdfcuv.Default_Value       FROM        fnd_concurrent_programs fcp,        fnd_concurrent_programs_tl fcpl,        fnd_descr_flex_col_usage_vl fdfcuv,        Fnd_Flex_Value_Sets Ffvs,        Fnd_Lookup_Values Flv     WHERE        fcp.concurrent_program_id = fcpl.concurrent_program_id        AND    fcpl.user_concurrent_program_name = '"
 					+ progName
-					+ "' and    fav.application_id=fcp.application_id and    fcpl.language = 'US' and    fdfcuv.descriptive_flexfield_name = '$SRS$.' || fcp.concurrent_program_name";
+					+ "'        AND    fdfcuv.descriptive_flexfield_name = '$SRS$.'                 || fcp.concurrent_program_name        AND    ffvs.flex_value_set_id = fdfcuv.flex_value_set_id        AND    flv.lookup_type(+) = 'FLEX_DEFAULT_TYPE'        AND    flv.lookup_code(+) = fdfcuv.default_type        AND    fcpl.LANGUAGE = USERENV ('LANG')        And    Flv.Language(+) = Userenv ('LANG')      ORDER BY fdfcuv.column_seq_num";
 			LOG_R.info("sql===" + sql);
 			BeanPropertyRowMapper rm = new BeanPropertyRowMapper(
 					Parameters.class);

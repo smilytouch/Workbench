@@ -23,7 +23,7 @@ public class concurrentReportParamsRepositoryImplTest extends
 	@Test
 	public void test_getParams_success() throws Exception {
 		List<Parameters> params=repository.getParams("Employee_information");
-		LOG_R.info("params===" + params.get(0).getPrompt());
+		LOG_R.info("params===" + params.get(0).getPrompt()+" "+params.get(0).getColumn_seq_num());
 		Assert.assertTrue(params.get(0).getPrompt().equalsIgnoreCase("Emp Number"));
 	}
 
