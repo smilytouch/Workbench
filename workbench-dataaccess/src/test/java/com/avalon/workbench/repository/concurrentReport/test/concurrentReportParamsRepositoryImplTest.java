@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.avalon.workbench.beans.concurrntReport.Parameters;
-import com.avalon.workbench.repository.concurrentReport.concurrentReportParamsRepository;
+import com.avalon.workbench.repository.concurrentReport.ConcurrentReportParamsRepository;
 import com.avalon.workbench.repository.test.AbstractWorkbenchDataAccessTest;
 
 public class concurrentReportParamsRepositoryImplTest extends
@@ -18,7 +18,7 @@ public class concurrentReportParamsRepositoryImplTest extends
 			.getLogger(concurrentReportParamsRepositoryImplTest.class);
 	@Autowired
 	@Qualifier(value = "concurrentReportParamsRepositoryImpl")
-	concurrentReportParamsRepository repository;
+	ConcurrentReportParamsRepository repository;
 
 	@Test
 	public void test_getParams_success() throws Exception {

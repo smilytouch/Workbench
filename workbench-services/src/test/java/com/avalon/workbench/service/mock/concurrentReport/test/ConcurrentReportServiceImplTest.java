@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.avalon.workbench.beans.concurrntPrograms.ConcurrentPrograms;
 import com.avalon.workbench.beans.concurrntReport.Inputs;
-import com.avalon.workbench.repository.concurrentReport.concurrentReportRepository;
+import com.avalon.workbench.repository.concurrentReport.ConcurrentReportRepository;
 import com.avalon.workbench.repository.concurrentReport.ConcurrentReportRepositoryImpl;
 import com.avalon.workbench.services.concurrentReport.ConcurrentReportServiceImpl;
 import com.avalon.workbench.services.test.AbstractWorkbenchServiceTest;

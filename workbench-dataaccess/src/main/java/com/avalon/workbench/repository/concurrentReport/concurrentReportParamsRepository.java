@@ -9,6 +9,6 @@ import com.avalon.workbench.beans.concurrntReport.Parameters;
 import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 
 @Repository
-public interface concurrentReportParamsRepository {
+public interface ConcurrentReportParamsRepository {
 	public List<Parameters> getParams(String progName) throws WorkbenchDataAccessException;
 }

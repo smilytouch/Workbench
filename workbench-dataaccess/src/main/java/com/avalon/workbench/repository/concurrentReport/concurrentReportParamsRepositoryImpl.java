@@ -13,10 +13,10 @@ import com.avalon.workbench.beans.user.User;
 import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 
 @Repository("concurrentReportParamsRepositoryImpl")
-public class concurrentReportParamsRepositoryImpl implements
-		concurrentReportParamsRepository {
+public class ConcurrentReportParamsRepositoryImpl implements
+		ConcurrentReportParamsRepository {
 	protected static final Logger LOG_R = Logger
-			.getLogger(concurrentReportParamsRepositoryImpl.class);
+			.getLogger(ConcurrentReportParamsRepositoryImpl.class);
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

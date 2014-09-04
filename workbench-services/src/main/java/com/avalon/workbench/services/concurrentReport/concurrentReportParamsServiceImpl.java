@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.avalon.workbench.beans.concurrntReport.Parameters;
-import com.avalon.workbench.repository.concurrentReport.concurrentReportParamsRepository;
-import com.avalon.workbench.repository.concurrentReport.concurrentReportRepository;
+import com.avalon.workbench.repository.concurrentReport.ConcurrentReportParamsRepository;
+import com.avalon.workbench.repository.concurrentReport.ConcurrentReportRepository;
 import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 import com.avalon.workbench.services.exception.WorkbenchServiceException;
 
@@ -21,7 +21,7 @@ public class ConcurrentReportParamsServiceImpl implements
 
 	@Autowired
 	@Qualifier(value = "concurrentReportParamsRepositoryImpl")
-	concurrentReportParamsRepository concurrentReportParamsRepository;
+	ConcurrentReportParamsRepository concurrentReportParamsRepository;
 
 	public List<Parameters> getParams(String progName) throws WorkbenchServiceException {
 		// TODO Auto-generated method stub

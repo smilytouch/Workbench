@@ -9,7 +9,7 @@ import com.avalon.workbench.beans.concurrntReport.Inputs;
 import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 
 @Repository
-public interface concurrentReportRepository {
+public interface ConcurrentReportRepository {
 	public String generateConcurrentReport(String respName, String uname, String shortName,String concurrentName, Inputs inputs, ArrayList<String> params) throws WorkbenchDataAccessException;
 	public void getConcurrentReport(String fileName) throws WorkbenchDataAccessException;
 }

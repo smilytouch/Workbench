@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.avalon.workbench.beans.concurrntReport.Inputs;
 import com.avalon.workbench.repository.concurrentReport.ConcurrentReportInputsRepository;
-import com.avalon.workbench.repository.concurrentReport.concurrentReportRepository;
+import com.avalon.workbench.repository.concurrentReport.ConcurrentReportRepository;
 import com.avalon.workbench.repository.exception.WorkbenchDataAccessException;
 import com.avalon.workbench.services.exception.WorkbenchServiceException;
 
@@ -20,7 +20,7 @@ public class ConcurrentReportServiceImpl implements ConcurrentReportService {
 
 	@Autowired
 	@Qualifier(value = "concurrentReportRepositoryImpl")
-	concurrentReportRepository concurrentReportRepository;
+	ConcurrentReportRepository concurrentReportRepository;
 
 	@Autowired
 	@Qualifier(value = "ConcurrentReportInputsServiceImpl")

@@ -25,7 +25,7 @@ import com.jcraft.jsch.Session;
 
 @Repository("concurrentReportRepositoryImpl")
 public class ConcurrentReportRepositoryImpl implements
-		concurrentReportRepository {
+		ConcurrentReportRepository {
 	protected static final Logger LOG_R = Logger
 			.getLogger(ConcurrentReportRepositoryImpl.class);
 
